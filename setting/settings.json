@@ -1,0 +1,16 @@
+{
+    "entity": [
+        {
+            "project": {
+                "fields": "ID,name,lastUpdatedByID,actualLaborCost,hasTimedNotifications,approvalProcessID,numberOpenOpTasks,status,auditTypes,actualRevenue,scheduleMode,plannedStartDate,version,fixedRevenue,alignmentScoreCardID,enableAutoBaselines,programID,statusUpdate,customerID,actualRiskCost,alignment,currentApprovalStepID,rejectionIssueID,projectedCompletionDate,budgetedCompletionDate,lastUpdateDate,percentComplete,actualBenefit,plannedValue,lastCalcDate,referenceNumber,autoBaselineRecurrenceType,milestonePathID,csi,portfolioPriority,resourcePoolID,remainingRevenue,popAccountID,eac,autoBaselineRecurOn,budgetStatus,lastNoteID,levelingMode,fixedCost,fixedStartDate,updateType,sponsorID,plannedBenefit,actualWorkRequired,cpi,remainingCost,templateID,plannedLaborCost,performanceIndexMethod,condition,selectedOnPortfolioOptimizer,durationMinutes,categoryID,groupID,projectedStartDate,budgetedStartDate,hasCalcError,workRequired,BCCompletionState,deliverableSuccessScore,conditionType,hasRateOverride,actualStartDate,description,risk,actualCost,submittedByID,actualExpenseCost,estStartDate,spi,estCompletionDate,fixedEndDate,plannedRevenue,personal,hasMessages,URL,actualCompletionDate,progressStatus,ownerPrivileges,companyID,hasExpenses,priority,optimizationScore,budgetedLaborCost,budgetedHours,ownerID,plannedCompletionDate,deliverableScoreCardID,portfolioID,previousStatus,displayOrder,actualValue,scheduleID,hasNotes,billedRevenue,hasResolvables,hasDocuments,actualDurationMinutes,extRefID,nextAutoBaselineDate,plannedCost,queueDefID,hasBudgetConflict,lastConditionNoteID,budgetedCost,entryDate,filterHourTypes,plannedRiskCost,remainingRiskCost,completionType,plannedExpenseCost,budget,enteredByID,riskPerformanceIndex,financeLastUpdateDate",
+                "customFields": ""
+            }
+        },
+        {
+            "team": {
+                "fields": "",
+                "customFields": ""
+            }
+        }
+    ]
+}
