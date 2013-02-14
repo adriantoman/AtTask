@@ -107,6 +107,10 @@ module Attask
       @milestone ||= Attask::API::Milestone.new(@credentials)
     end
 
+    def metadata
+      @metadata ||= Attask::API::Metadata.new(@credentials)
+    end
+
 
 
 

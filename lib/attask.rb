@@ -14,8 +14,8 @@ require 'attask/base'
 
 %w(default).each {|a| require "attask/behavior/#{a}"}
 
-%w(model project assigment baseline baselinetask category company expense expensetype group hour hourtype issue rate resourcepool risk risktype role schedule task team timesheet user milestone).each {|a| require "attask/#{a}"}
-%w(base project assigment baseline baselinetask category company expense expensetype group hour hourtype issue rate resourcepool risk risktype role schedule task team timesheet user milestone).each {|a| require "attask/api/#{a}"}
+%w(model project assigment baseline baselinetask category company expense expensetype group hour hourtype issue rate resourcepool risk risktype role schedule task team timesheet user milestone metadata).each {|a| require "attask/#{a}"}
+%w(base project assigment baseline baselinetask category company expense expensetype group hour hourtype issue rate resourcepool risk risktype role schedule task team timesheet user milestone metadata).each {|a| require "attask/api/#{a}"}
 
 
 module Attask

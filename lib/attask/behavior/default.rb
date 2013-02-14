@@ -3,6 +3,9 @@ module Attask
     module Default
 
 
+      LIMIT = 200
+
+
       def metadata
         @metadata ||= request(:get, credentials, api_model.api_path + "/metadata")
       end
@@ -24,8 +27,26 @@ module Attask
         fields = sortFields(fields)
 
         query = { :fields => fields }.merge(query_options)
-        response = request(:get, credentials, api_model.api_path + "/search", :query => query)
-        api_model.parse(response.parsed_response["data"])
+
+        first = 0
+        query = query.merge({"$$FIRST" => first, "$$LIMIT" => LIMIT})
+        ended = false
+        objects = Array.new
+
+
+        while (!ended) do
+          response = request(:get, credentials, api_model.api_path + "/search", :query => query)
+          downloaded =  api_model.parse(response.parsed_response["data"])
+          #puts "Setting is first = #{first} and LIMIT = #{LIMIT} and we have downloaded #{objects.count}"
+          if (downloaded.count == LIMIT)
+            first = first + LIMIT
+            query = query.merge({"$$FIRST" => first, "$$LIMIT" => LIMIT})
+          else
+            ended = true
+          end
+          objects.concat(downloaded)
+        end
+        objects
       end
 
 
