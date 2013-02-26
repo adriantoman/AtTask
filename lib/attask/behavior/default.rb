@@ -65,6 +65,10 @@ module Attask
         api_model.parse(response.parsed_response["data"])
       end
 
+      def exec_function(object,function,options = {})
+        response = request(:put, credentials, api_model.api_path + "/#{object.ID}", :query => {:action => function})
+      end
+
 
 
       # Create CSV export for Attask::Model object
