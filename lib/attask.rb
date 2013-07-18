@@ -3,6 +3,7 @@ $: << File.expand_path(File.dirname(__FILE__) + "/")
 require "httparty"
 require 'hashie'
 require 'json'
+require 'zlib'
 
 require 'ext/array'
 require 'ext/hash'

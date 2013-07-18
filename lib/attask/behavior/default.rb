@@ -75,6 +75,9 @@ module Attask
       # Same options setting as search
       # @param [HASH] options for specifying export folder, filename and search options
       def exportToCsv(options = {})
+
+        gzip = options[:gzip] || false
+
         settings(options[:settings]) if options[:settings] != nil
         fields =  options[:fields] || getSettingsFields != nil ? getSettingsFields : nil || getAllFields
         customFields = options[:customFields] || getSettingsCustomFields != nil ? getSettingsCustomFields : nil || getCustomFields
@@ -99,6 +102,14 @@ module Attask
             csv << temp
           end
         end
+
+        if (gzip)
+          Zlib::GzipWriter.open("#{filepath}#{filename}".gsub(".csv",".gz")) do |gz|
+            gz.write File.read("#{filepath}#{filename}")
+          end
+        end
+
+
       end
 
       private
