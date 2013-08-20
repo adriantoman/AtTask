@@ -98,8 +98,12 @@ module Attask
             temp = Array.new
             ordered_fields.each do |o|
               # Remove special characters:
-              value = object[o].delete('\n').delete('"')
-              temp.push(value)
+              if (object[o].is_a?(string))
+                value = object[o].delete('\n').delete('"')
+                temp.push(value)
+              else
+                temp.push(object[o])
+              end
             end
             csv << temp
           end
