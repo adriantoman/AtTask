@@ -98,7 +98,7 @@ module Attask
             temp = Array.new
             ordered_fields.each do |o|
               # Remove special characters:
-              if (object[o].is_a?(string))
+              if (object[o].instance_of? String)
                 value = object[o].delete('\n').delete('"')
                 temp.push(value)
               else
