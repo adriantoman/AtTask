@@ -99,7 +99,7 @@ module Attask
             ordered_fields.each do |o|
               # Remove special characters:
               if (object[o].instance_of? String)
-                value = object[o].delete('\n').delete('"')
+                value = object[o].delete("\n").delete('"')
                 temp.push(value)
               else
                 temp.push(object[o])
