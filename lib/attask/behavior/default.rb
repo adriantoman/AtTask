@@ -97,7 +97,9 @@ module Attask
           objects.each do |object|
             temp = Array.new
             ordered_fields.each do |o|
-              temp.push(object[o])
+              # Remove special characters:
+              value = object[o].delete("\n").delete('"')
+              temp.push(value)
             end
             csv << temp
           end
