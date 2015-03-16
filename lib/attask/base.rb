@@ -111,6 +111,14 @@ module Attask
       @metadata ||= Attask::API::Metadata.new(@credentials)
     end
 
+    def portfolio
+      @portfolio ||= Attask::API::Portfolio.new(@credentials)
+    end
+
+    def program
+      @program ||= Attask::API::Program.new(@credentials)
+    end
+
 
 
 
