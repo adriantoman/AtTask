@@ -11,8 +11,8 @@ require 'fastercsv'
 require 'date'
 require "lib/attask.rb"
 require 'cgi'
-require 'active_support/all'
-include GLI
+#require 'active_support/all'
+include GLI::App
 
 program_desc 'Program for synchronizing task'
 
@@ -58,4 +58,4 @@ on_error do |exception|
   # true
 end
 
-exit GLI.run(ARGV)
+exit run(ARGV)
