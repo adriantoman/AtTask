@@ -23,5 +23,9 @@ Gem::Specification.new do |s|
   s.add_dependency "hashie"
   s.add_dependency "json"
   s.add_dependency "ext"
+  s.add_dependency "gli"
+  s.add_dependency "chronic"
+  s.add_dependency "fastercsv"
+  s.add_dependency "activesupport"
 
 end
