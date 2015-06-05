@@ -119,6 +119,10 @@ module Attask
       @program ||= Attask::API::Program.new(@credentials)
     end
 
+    def billingrecord
+      @billingrecord ||= Attask::API::BillingRecord.new(@credentials)
+    end
+
 
 
 
