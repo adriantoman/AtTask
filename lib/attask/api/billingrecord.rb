@@ -9,7 +9,7 @@ module Attask
 
       def add_hours(object,hours_collection)
         billing_record_id = object["ID"]
-        hours_collection_string = hours_collection.join(",")
+        hours_collection_string = CGI.escape(hours_collection.join(","))
         response = request(:post, credentials, api_model.api_path + "/hour/add", :query => {
                                     :objIDs => hours_collection_string, :billingRecordID => billing_record_id
                                 })
