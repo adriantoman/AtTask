@@ -3,7 +3,7 @@ module Attask
     class Base
       include HTTParty
 
-      #debug_output $stdout
+      debug_output $stdout
 
       attr_reader :credentials
 
