@@ -9,7 +9,7 @@ module Attask
   class BillingRecord < Hashie::Mash
     include Attask::Model
 
-    api_path '/billingrecord'
+    api_path '/bill'
 
 
   end
