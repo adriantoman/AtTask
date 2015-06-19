@@ -1,18 +1,15 @@
 module Attask
   module API
 
-    class ServiceWrapper
+    class Base
       include HTTParty
+
 
       query_string_normalizer proc { |query|
                                 query.map do |key, value|
                                   value.map {|v| "#{key}=#{v}"}
                                 end.join('&')
                               }
-    end
-
-    class Base
-      include HTTParty
 
       debug_output $stdout
 
