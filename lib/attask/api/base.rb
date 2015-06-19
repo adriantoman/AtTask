@@ -6,7 +6,7 @@ module Attask
 
 
       query_string_normalizer proc { |query|
-                                if query.instance_of(Hash)
+                                if query.instance_of?(Hash)
                                   query.map do |key, value|
                                     value.map {|v| "#{key}=#{v}"}
                                   end.join('&')
