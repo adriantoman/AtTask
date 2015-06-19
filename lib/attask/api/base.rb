@@ -6,12 +6,13 @@ module Attask
 
 
       query_string_normalizer proc { |query|
-                                pp query
-                                if query.instance_of?(Hash)
-                                  query.map do |key, value|
+                                query.map do |key, value|
+                                  if value.instance_of?(Hash)
                                     value.map {|v| "#{key}=#{v}"}
-                                  end.join('&')
-                                end
+                                  else
+                                    value
+                                  end
+                                end.join('&')
                               }
 
       debug_output $stdout
