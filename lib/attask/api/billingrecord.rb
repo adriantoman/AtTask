@@ -15,7 +15,12 @@ module Attask
         response = request(:put, credentials, "/bill/#{billing_record_id}", :query => {
                                     :updates => update,
                                     :fields => "hours"
-                                })
+                            }
+
+
+
+
+        )
         response
       end
 

@@ -1,5 +1,16 @@
 module Attask
   module API
+
+    class ServiceWrapper
+      include HTTParty
+
+      query_string_normalizer proc { |query|
+                                query.map do |key, value|
+                                  value.map {|v| "#{key}=#{v}"}
+                                end.join('&')
+                              }
+    end
+
     class Base
       include HTTParty
 
