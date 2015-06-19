@@ -10,7 +10,7 @@ module Attask
                                   if value.instance_of?(Hash)
                                     value.map {|v| "#{key}=#{v}"}
                                   else
-                                    value
+                                    "#{key}=#{value}"
                                   end
                                 end.join('&')
                               }
