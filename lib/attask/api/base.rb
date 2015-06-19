@@ -14,7 +14,7 @@ module Attask
                                         output ="{#{inner_key}:[#{inner_value.map{|v| "{ID:\"#{v}\"}"}.join(",")}]}"
                                       end
                                     end
-                                    "#{key}=#{output}"
+                                    "#{key}=#{CGI.escape(output)}"
                                   else
                                     "#{key}=#{value}"
                                   end
