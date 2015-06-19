@@ -8,7 +8,13 @@ module Attask
       query_string_normalizer proc { |query|
                                 query.map do |key, value|
                                   if value.instance_of?(Hash)
-                                    value.map {|v| "#{key}=#{v}"}
+                                    output = ""
+                                    value.each_pair do |inner_key,inner_value|
+                                      if (inner_value.instance_of(Array))
+                                        output ="{#{inner_key}:[#{inner_value.map{|v| "{ID:\"#{v}\"}"}}]}"
+                                      end
+                                    end
+                                    "#{key}=#{output}"
                                   else
                                     "#{key}=#{value}"
                                   end
