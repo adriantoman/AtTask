@@ -15,10 +15,6 @@ module Attask
                                     },
                                     :fields => "hours"
                             }
-
-
-
-
         )
         response
       end

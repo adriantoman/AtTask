@@ -11,7 +11,7 @@ module Attask
                                     output = ""
                                     value.each_pair do |inner_key,inner_value|
                                       if (inner_value.instance_of?(Array))
-                                        output ="{#{inner_key}:[#{inner_value.map{|v| "{ID:\"#{v}\"}"}.join(",")}]}"
+                                        output ="{#{inner_key}:[#{inner_value.map{|v| "{ID: \"#{v}\"}"}.join(",")}]}"
                                       end
                                     end
                                     "#{key}=#{CGI.escape(output)}"
