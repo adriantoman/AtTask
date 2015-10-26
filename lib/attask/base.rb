@@ -119,6 +119,10 @@ module Attask
       @program ||= Attask::API::Program.new(@credentials)
     end
 
+    def reservedtime
+      @reservedtime ||= Attask::API::ReservedTime.new(@credentials)
+    end
+
 
 
 
