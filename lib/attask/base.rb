@@ -123,6 +123,9 @@ module Attask
       @reservedtime ||= Attask::API::ReservedTime.new(@credentials)
     end
 
+    def resourceestimate
+      @resourceestimate ||= Attask::API::ResourceEstimate.new(@credentials)
+    end
 
 
 
