@@ -13,7 +13,7 @@ module Attask
     end
 
     def host
-      if (@sandbox != nil) then
+      if (@sandbox) then
         "https://#{subdomain}.attasksandbox.com/attask/api/#{@version}"
       else
         "https://#{subdomain}.attask-ondemand.com/attask/api/#{@version}"
