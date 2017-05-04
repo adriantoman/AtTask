@@ -7,7 +7,6 @@ require 'gli'
 require 'pp'
 require 'date'
 require 'chronic'
-require 'fastercsv'
 require 'date'
 require "lib/attask.rb"
 require 'cgi'

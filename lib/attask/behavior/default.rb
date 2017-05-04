@@ -92,7 +92,7 @@ module Attask
 
         ordered_fields = fields.split(",")
 
-        FasterCSV.open("#{filepath}#{filename}", "w",{:col_sep => ",",:quote_char => '"'}) do |csv|
+        CSV.open("#{filepath}#{filename}", "w",{:col_sep => ",",:quote_char => '"'}) do |csv|
           csv << ordered_fields
           objects.each do |object|
             temp = Array.new
