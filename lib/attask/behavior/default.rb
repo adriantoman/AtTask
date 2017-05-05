@@ -101,6 +101,8 @@ module Attask
               if (object[o].instance_of? String)
                 value = object[o].delete("\n").delete('"')
                 temp.push(value)
+              elsif (object[o].instance_of? Hashie::Array)
+                temp.push(object[o].first)
               else
                 temp.push(object[o])
               end
