@@ -114,6 +114,7 @@ module Attask
 
         if (gzip)
           if OS.linux? || OS.mac?
+            puts "Using COMMAND line packing"
             gzip = "#{filepath}#{filename}".gsub(".csv",".gz")
             `gzip #{gzip}`
           else
