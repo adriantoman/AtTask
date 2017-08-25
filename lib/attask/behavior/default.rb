@@ -111,9 +111,15 @@ module Attask
           end
         end
 
+
         if (gzip)
-          Zlib::GzipWriter.open("#{filepath}#{filename}".gsub(".csv",".gz")) do |gz|
-            gz.write File.read("#{filepath}#{filename}")
+          if OS.linux? || OS.mac?
+            gzip = "#{filepath}#{filename}".gsub(".csv",".gz")
+            `gzip #{gzip}`
+          else
+              Zlib::GzipWriter.open("#{filepath}#{filename}".gsub(".csv",".gz")) do |gz|
+              gz.write File.read("#{filepath}#{filename}")
+            end
           end
         end
 

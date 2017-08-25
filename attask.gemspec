@@ -25,4 +25,5 @@ Gem::Specification.new do |s|
   s.add_dependency "ext"
   s.add_dependency "chronic"
   s.add_dependency "activesupport"
+  a.add_dependency 'os'
 end

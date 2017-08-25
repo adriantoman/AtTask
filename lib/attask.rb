@@ -4,6 +4,7 @@ require "httparty"
 require 'hashie'
 require 'json'
 require 'zlib'
+require 'os'
 
 require 'ext/array'
 require 'ext/hash'
