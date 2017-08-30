@@ -9,6 +9,38 @@ module Attask
       raise InvalidCredentials unless credentials.valid?
     end
 
+
+    def clean_cache
+      @project = nil
+      @baseline = nil
+      @assigment = nil
+      @baselinetask = nil
+      @category = nil
+      @company = nil
+      @expense = nil
+      @expensetype = nil
+      @group = nil
+      @hour = nil
+      @hourtype = nil
+      @issue = nil
+      @rate = nil
+      @resourcepool = nil
+      @risk = nil
+      @risktype = nil
+      @role = nil
+      @schedule = nil
+      @task = nil
+      @team = nil
+      @timesheet = nil
+      @user = nil
+      @milestone = nil
+      @metadata = nil
+      @portfolio = nil
+      @program = nil
+      @reservedtime = nil
+      @resourceestimate = nil
+    end
+
     # All API actions surrounding accounts
     #
     # == Examples
