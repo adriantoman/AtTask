@@ -39,6 +39,7 @@ module Attask
       @program = nil
       @reservedtime = nil
       @resourceestimate = nil
+      GC.start
     end
 
     # All API actions surrounding accounts
