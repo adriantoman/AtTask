@@ -94,6 +94,7 @@ module Attask
 
         CSV.open("#{filepath}#{filename}", "w",{:col_sep => ",",:quote_char => '"'}) do |csv|
           csv << ordered_fields
+          puts "Object count #{objects.count}"
           objects.each do |object|
             temp = Array.new
             ordered_fields.each do |o|
@@ -113,15 +114,15 @@ module Attask
 
 
         if (gzip)
-          if OS.linux? || OS.mac?
-            puts "Using COMMAND line packing"
-            gzip = "#{filepath}#{filename}".gsub(".csv",".gz")
-            `gzip #{gzip}`
-          else
+          # if OS.linux? || OS.mac?
+          #   puts "Using COMMAND line packing"
+          #   gzip = "#{filepath}#{filename}".gsub(".csv",".gz")
+          #   `gzip #{gzip}`
+          # else
               Zlib::GzipWriter.open("#{filepath}#{filename}".gsub(".csv",".gz")) do |gz|
               gz.write File.read("#{filepath}#{filename}")
             end
-          end
+          # end
         end
 
 
