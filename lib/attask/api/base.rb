@@ -29,7 +29,7 @@ module Attask
           params[:options] = options
           query = {:username => credentials.username,:password => credentials.password}
 
-          response = self.class.send(:get, "#{credentials.host}#{LOGIN_PATH}",
+          response = self.class.send(:post, "#{credentials.host}#{LOGIN_PATH}",
                                    :query => query
           )
           case response.code
@@ -48,7 +48,7 @@ module Attask
             when 503
               raise Attask::RateLimited.new(response, params)
             else
-              raise Attask::InformHarvest.new(response, params)
+              raise Attask::ServerError.new(response, params)
           end
 
         end

@@ -160,6 +160,10 @@ module Attask
       @resourceestimate ||= Attask::API::ResourceEstimate.new(@credentials)
     end
 
+    def budgetedhour
+      @budgetedhour ||= Attask::API::BudgetedHour.new(@credentials)
+    end
+
 
 
 
