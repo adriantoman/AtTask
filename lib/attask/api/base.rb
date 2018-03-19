@@ -70,10 +70,10 @@ module Attask
                                    :headers => {
                                        "sessionId" => credentials.session,
                                        "Accept" => "application/json",
-                                       "Content-Type" => "application/json; charset=utf-8",
-                                       "Content-Length" => "0"
+                                       "Content-Type" => "application/json; charset=utf-8"
                                       }
           )
+
           params[:response] = response.inspect.to_s
 
           case response.code

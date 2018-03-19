@@ -11,7 +11,8 @@ module Attask
         response = request(:get, credentials, api_model.api_path + "/metadata")
         json = response.parsed_response["data"]
         fields = Array.new
-        json["fields"].each_key do |key|
+        json["fields"].each_pair do |key,value|
+          next if value['flags'] && value['flags'].include?('WRITE_ONLY')
           fields.push(key)
         end
 

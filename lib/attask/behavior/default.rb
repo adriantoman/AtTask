@@ -75,10 +75,10 @@ module Attask
       # Same options setting as search
       # @param [HASH] options for specifying export folder, filename and search options
       def exportToCsv(options = {})
-
         gzip = options[:gzip] || false
 
         settings(options[:settings]) if options[:settings] != nil
+
         fields =  options[:fields] || getSettingsFields != nil ? getSettingsFields : nil || getAllFields
         customFields = options[:customFields] || getSettingsCustomFields != nil ? getSettingsCustomFields : nil || getCustomFields
 
@@ -157,7 +157,8 @@ module Attask
       def getAllFields
         json = metadata.parsed_response["data"]
         fields = Array.new
-        json["fields"].each_key do |key|
+        json["fields"].each_pair do |key,value|
+          next if value['flags'] && value['flags'].include?('WRITE_ONLY')
           fields.push(key)
         end
         fields.join(',')
