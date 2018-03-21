@@ -13,6 +13,7 @@ require 'attask/credentials'
 require 'attask/error'
 
 require 'attask/base'
+require 'attask/storages/storages'
 
 %w(default).each {|a| require "attask/behavior/#{a}"}
 

@@ -12,7 +12,7 @@ module Attask
 
       # Retrieves all items
       # @return [Array<Attask::Model>] an array of models depending on where you're calling it from (e.g. [Attask::Client] from Attask::Base#clients)
-      def search(options = {},query_options = {})
+      def search(options = {},query_options = {}, storage_object = nil)
 
         # Load setting from setting file
         settings(options[:settings]) if options[:settings] != nil
@@ -31,7 +31,7 @@ module Attask
         first = 0
         query = query.merge({"$$FIRST" => first, "$$LIMIT" => LIMIT})
         ended = false
-        objects = Array.new
+        objects = storage_object || ArrayStorage.new
 
 
         while (!ended) do
@@ -46,7 +46,9 @@ module Attask
           end
           objects.concat(downloaded)
         end
-        objects
+        puts "Downloaded #{objects.count} records"
+        objects.close
+        objects.value
       end
 
 
@@ -74,7 +76,7 @@ module Attask
       # Create CSV export for Attask::Model object
       # Same options setting as search
       # @param [HASH] options for specifying export folder, filename and search options
-      def exportToCsv(options = {})
+      def exportToCsv(options = {},query_options = {})
         gzip = options[:gzip] || false
 
         settings(options[:settings]) if options[:settings] != nil
@@ -85,44 +87,19 @@ module Attask
         fields = [fields != "" ? fields : nil,customFields != "" ? customFields : nil].compact.join(",")
         fields = sortFields(fields)
 
-        objects = search(options)
         filename = options[:filename]
         filepath = options[:filepath]
-        warn "There are no data in specified entity" if objects.empty?
+
 
         ordered_fields = fields.split(",")
-
-        CSV.open("#{filepath}#{filename}", "w",{:col_sep => ",",:quote_char => '"'}) do |csv|
-          csv << ordered_fields
-          puts "Object count #{objects.count}"
-          objects.each do |object|
-            temp = Array.new
-            ordered_fields.each do |o|
-              # Remove special characters:
-              if (object[o].instance_of? String)
-                value = object[o].delete("\n").delete('"')
-                temp.push(value)
-              elsif (object[o].instance_of? Hashie::Array)
-                temp.push(object[o].first)
-              else
-                temp.push(object[o])
-              end
-            end
-            csv << temp
-          end
-        end
+        storage_object = CsvStorage.new(filepath, filename, ordered_fields)
+        search(options,query_options,storage_object)
 
 
         if (gzip)
-          # if OS.linux? || OS.mac?
-          #   puts "Using COMMAND line packing"
-          #   gzip = "#{filepath}#{filename}".gsub(".csv",".gz")
-          #   `gzip #{gzip}`
-          # else
-              Zlib::GzipWriter.open("#{filepath}#{filename}".gsub(".csv",".gz")) do |gz|
-              gz.write File.read("#{filepath}#{filename}")
-            end
-          # end
+          Zlib::GzipWriter.open("#{filepath}#{filename}".gsub(".csv",".gz")) do |gz|
+            gz.write File.read("#{filepath}#{filename}")
+          end
         end
 
 
