@@ -9,7 +9,6 @@ module Attask
       raise InvalidCredentials unless credentials.valid?
     end
 
-
     def clean_cache
       @project = nil
       @baseline = nil
@@ -163,12 +162,5 @@ module Attask
     def budgetedhour
       @budgetedhour ||= Attask::API::BudgetedHour.new(@credentials)
     end
-
-
-
-
-
-
-
   end
 end

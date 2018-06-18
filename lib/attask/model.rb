@@ -6,19 +6,19 @@ module Attask
     end
 
     module InstanceMethods
-      def to_json(*args)
-        as_json(*args).to_json(*args)
-      end
+      # def to_json(*args)
+      #   as_json(*args).to_json(*args)
+      # end
 
-      def as_json(args = {})
-        inner_json = self.to_hash.stringify_keys
-        inner_json.delete("cache_version")
-        if self.class.skip_json_root?
-          inner_json
-        else
-          { self.class.json_root => inner_json }
-        end
-      end
+      # def as_json(args = {})
+      #   inner_json = self.to_hash.stringify_keys
+      #   inner_json.delete("cache_version")
+      #   if self.class.respond_to?(:skip_json_root?) && self.class.skip_json_root?
+      #     inner_json
+      #   else
+      #     { self.class.json_root => inner_json }
+      #   end
+      # end
 
 
 
@@ -38,9 +38,9 @@ module Attask
         end
       end
 
-      def json_root
-        self.class.json_root
-      end
+      # def json_root
+      #   self.class.json_root
+      # end
 
       def columns_order(order)
         @_columns_order = order

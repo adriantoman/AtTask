@@ -5,7 +5,7 @@ module Attask
     def initialize(subdomain, username, password, options)
       @subdomain, @username, @password, @session = subdomain, username, password, nil
       @sandbox = options[:sandbox]
-      @version = options[:version] || "v3.0"
+      @version = options[:version] || 'v3.0'
     end
 
     def valid?
@@ -13,17 +13,15 @@ module Attask
     end
 
     def host
-      if (@sandbox != nil) then
-        "https://#{subdomain}.attasksandbox.com/attask/api/#{@version}"
+      if @sandbox
+        "https://#{subdomain}.workfront.com/attask/api/#{@version}"
       else
         "https://#{subdomain}.attask-ondemand.com/attask/api/#{@version}"
       end
     end
 
-    def is_loged?
-      return true if @session != nil
+    def is_logged?
+      !@session.nil?
     end
-
-
   end
 end
