@@ -25,24 +25,25 @@ module Attask
         query = {:fields => fields}.merge(query_options)
 
         first = 0
-        query = query.merge({"$$FIRST" => first, "$$LIMIT" => LIMIT})
+        # Note: $$LIMIT doesn't work as expected, which is a verified bug.
+        query = query.merge({"$$FIRST" => first})
         ended = false
         objects = storage_object || ArrayStorage.new
-
+        objects_count = 0
 
         until ended
           response = request(:get, credentials, api_model.api_path + "/search", :query => query)
           downloaded = api_model.parse(response.parsed_response["data"])
-          #puts "Setting is first = #{first} and LIMIT = #{LIMIT} and we have downloaded #{objects.count}"
-          if downloaded.count == LIMIT
-            first = first + LIMIT
-            query = query.merge({"$$FIRST" => first, "$$LIMIT" => LIMIT})
+          if downloaded && downloaded.any?
+            first += downloaded.size
+            query = query.merge({"$$FIRST" => first})
           else
             ended = true
           end
           objects.concat(downloaded)
+          objects_count += downloaded.size
         end
-        puts "Downloaded #{objects.count} records"
+        puts "Downloaded #{objects_count} records for entity #{self.class.name}"
         objects.close
         objects.value
       end
