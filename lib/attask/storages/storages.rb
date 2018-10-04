@@ -20,31 +20,28 @@ class ArrayStorage
 end
 
 class CsvStorage
-
-  def initialize(filepath,filename,fields)
+  def initialize(filepath, filename, fields)
     @ordered_fields = fields
-    @csv = CSV.open("#{filepath}#{filename}", "w",{:col_sep => ",",:quote_char => '"'})
+    @csv = CSV.open("#{filepath}#{filename}", 'w', :col_sep => ',', :quote_char => '"')
     @csv << fields
     @counter = 0
   end
 
-
   def concat(objects)
-
     objects.each do |object|
       temp = Array.new
       @ordered_fields.each do |o|
         # Remove special characters:
-        if (object[o].instance_of? String)
+        if object[o].is_a? String
           value = object[o].delete("\n").delete('"')
           temp.push(value)
-        elsif (object[o].instance_of? Hashie::Array)
+        elsif object[o].is_a? Hashie::Array
           temp.push(object[o].first)
         else
           temp.push(object[o])
         end
-        @counter += 1
       end
+      @counter += 1
       @csv << temp
     end
   end
@@ -60,5 +57,4 @@ class CsvStorage
   def value
     nil
   end
-
 end

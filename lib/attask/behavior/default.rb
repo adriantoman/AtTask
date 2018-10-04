@@ -25,20 +25,34 @@ module Attask
         query = {:fields => fields}.merge(query_options)
 
         first = 0
-        # Note: $$LIMIT doesn't work as expected, which is a verified bug.
-        query = query.merge({"$$FIRST" => first})
+        limit = 2000
+        query = query.merge('$$FIRST' => first, '$$LIMIT' => limit)
         ended = false
         objects = storage_object || ArrayStorage.new
         objects_count = 0
 
+        primary_keys = {}
+
         until ended
-          response = request(:get, credentials, api_model.api_path + "/search", :query => query)
+          response = request(:get, credentials, api_model.api_path + '/search', :query => query)
           downloaded = api_model.parse(response.parsed_response["data"])
-          if downloaded && downloaded.any?
+          if downloaded&.any?
             first += downloaded.size
-            query = query.merge({"$$FIRST" => first})
+            query = query.merge("$$FIRST" => first)
           else
             ended = true
+          end
+          downloaded.each do |object|
+            next unless options[:uniq_by_pk]
+            pk = options[:uniq_by_pk].to_sym
+            next unless object.respond_to?(pk)
+            actual_pk = object.send(pk)
+            if primary_keys.key?(actual_pk)
+              # Sometimes the API returns duplicates, we decided to fail if that happens to be able to detect that easily
+              raise StandardError, "Object with ID #{actual_pk} is a duplicate returned from the API. Aborting."
+            else
+              primary_keys[actual_pk] = nil
+            end
           end
           objects.concat(downloaded)
           objects_count += downloaded.size
