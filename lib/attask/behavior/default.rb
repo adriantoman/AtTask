@@ -48,8 +48,8 @@ module Attask
             next unless object.respond_to?(pk)
             actual_pk = object.send(pk)
             if primary_keys.key?(actual_pk)
-              # Sometimes the API returns duplicates, we decided to fail if that happens to be able to detect that easily
-              raise StandardError, "Object with ID #{actual_pk} is a duplicate returned from the API. Aborting."
+              # Sometimes the API returns duplicates, we decided to skip if that happens to be able to detect that easily
+              puts "WARN: Object with ID #{actual_pk} is a duplicate returned from the API."
             else
               primary_keys[actual_pk] = nil
             end
