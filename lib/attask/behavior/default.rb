@@ -26,7 +26,9 @@ module Attask
 
         first = 0
         limit = 2000
-        query = query.merge('ID_Sort' => 'asc', '$$FIRST' => first, '$$LIMIT' => limit)
+        query_sort = options[:query_sort]
+        query.merge!('$$FIRST' => first, '$$LIMIT' => limit)
+        query.merge!(query_sort) if query_sort.is_a?(Hash)
         ended = false
         objects = storage_object || ArrayStorage.new
         objects_count = 0
