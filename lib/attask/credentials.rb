@@ -13,11 +13,8 @@ module Attask
     end
 
     def host
-      if @sandbox
-        "https://#{subdomain}.workfront.com/attask/api/#{@version}"
-      else
-        "https://#{subdomain}.attask-ondemand.com/attask/api/#{@version}"
-      end
+      fail "Sandbox is not supported anymore." if @sandbox
+      "https://#{subdomain}.my.workfront.com/attask/api/#{@version}"
     end
 
     def is_logged?
