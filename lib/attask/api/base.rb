@@ -62,6 +62,7 @@ module Attask
         params[:method] = method
 
         response = self.class.send(method, "#{credentials.host}#{path}",
+                                   :timeout => 120,
                                    :query => options[:query],
                                    :body => options.key?(:body) ? options[:body].to_h.to_json : nil,
                                    :headers => {
